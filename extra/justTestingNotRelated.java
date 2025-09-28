@@ -1,6 +1,6 @@
 package extra;
 
-public class justTestingNotRelayed {
+public class justTestingNotRelated {
     public static void main(String[] args){
 
         // ANSI escape codes
@@ -10,7 +10,7 @@ public class justTestingNotRelayed {
         String YELLOW = "\u001B[33m";
         String BLUE = "\u001B[34m";
 
-        System.out.println(RED + "This is red text" + RESET);
+        System.out.println(RED + "This is red text" + RESET + "test");
         System.out.println(GREEN + "This is green text" + RESET);
         System.out.println(YELLOW + "This is yellow text" + RESET);
         System.out.println(BLUE + "This is blue text" + RESET);

@@ -1,3 +1,6 @@
+/*
+ * Add dmg
+ */
 public class CharacterStats {
     private String name;
     private String role;
@@ -59,14 +62,13 @@ public class CharacterStats {
 }
 
 class ChelseyStats extends CharacterStats{
-    public ChelseyStats(boolean isLocked){// Fill the parameters
-        super("idk", "idk", 10, 10, isLocked);
+    public ChelseyStats(String name, String role, int health, int mana, boolean isLocked){
+        super(name, role, health, mana, isLocked);
     }
 
     @Override
     void printCharacterStats() {
         super.printCharacterStats();
-        //fill this part
     }
 }
 
@@ -77,24 +79,17 @@ class NoelStats extends CharacterStats{
 
     @Override
     void printCharacterStats() {
-        System.out.println("--------------------------------");
-        System.out.println("        Name: " + getName());
-        System.out.println("        Role: " + getRole());
-        System.out.println("        Health: " + getHealth());
-        System.out.println("        Mana: " + getMana());
-        System.out.println("--------------------------------");
-        System.out.println();
+        super.printCharacterStats();
     }
 }
 
 class RemrieStats extends CharacterStats{
-    public RemrieStats(){// Fill the parameters
-        super();
+    public RemrieStats(String name, String role, int health, int mana, boolean isLocked){// Fill the parameters
+        super(name, role, health, mana, isLocked);
     }
 
     @Override
     void printCharacterStats() {
         super.printCharacterStats();
-        //fill this part
     }
 }
