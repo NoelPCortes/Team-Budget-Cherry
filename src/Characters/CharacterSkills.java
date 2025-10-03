@@ -1,3 +1,4 @@
+package Characters;
 /*
  * Implement skills to each character
  * Implement dmg, mana cost and cooldowns

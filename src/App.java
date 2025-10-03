@@ -1,7 +1,27 @@
 import java.util.Scanner;
 
+import Characters.CharacterSkills;
+import Characters.CharacterStats;
+import Characters.ChelseyStats;
+import Characters.NoelStats;
+import Characters.RemrieStats;
+
 public class App{
     public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+
+        CharacterStats character = new CharacterStats();
+        CharacterSkills [] characterSkills = new CharacterSkills[3];
+        characterSkills[0] = new CharacterSkills();
+        characterSkills[1] = new CharacterSkills();
+        characterSkills[2] = new CharacterSkills();
+
+        character = chooseCharacter();
+
+        sc.close();
+    }
+
+    public static CharacterStats chooseCharacter(){
         Scanner sc = new Scanner(System.in);
 
         CharacterStats character = new CharacterStats();
@@ -25,15 +45,15 @@ public class App{
                 System.out.println("Character(s)");
                 //Character 1
                 displayCharacterStats = new ChelseyStats
-                                    ("Chelsey", "Stategist/Support", 100, 50, false); // Fill argument "isLocked = false"
+                                    (false); // Fill argument "isLocked = false"
                 System.out.println("[1] Chelsey - The System Thinker" + displayCharacterStats.getIsLocked());
                 //Character 2
                 displayCharacterStats = new NoelStats
-                                    ("Noel", "DPS", 75, 100, true);
+                                    (true);
                 System.out.println("[2] Noel - The Code Ace " + displayCharacterStats.getIsLocked());
                 //Character 3
                 displayCharacterStats = new RemrieStats
-                                    ("Remrie", "Tank/Utility", 150, 75, true); // Fill argument "isLocked = true"
+                                    (true); // Fill argument "isLocked = true"
                 System.out.println("[3] Remrie - The Meticulous Researcher " + displayCharacterStats.getIsLocked());
                 System.out.println();
             }
@@ -137,6 +157,8 @@ public class App{
                 if(inputEntered >= 1 && inputEntered <= 3)
                 {
                     characterChosen = true;
+                } else {
+                    System.out.println("Invalid input must be only [1 - 3]");
                 }
             }
 
@@ -144,17 +166,17 @@ public class App{
                 switch (inputEntered)
                 {
                     case 1 -> { character = new ChelseyStats
-                                ("Chelsey", "Stategist/Support", 100, 50, false);
+                                (false);
                                 displayCharacterStats = new ChelseyStats
-                                ("Chelsey", "Stategist/Support", 100, 50, false); }
+                                (false); }
                     case 2 -> { character = new NoelStats
-                                ("Noel", "DPS", 75, 100, true); 
+                                (true); 
                                 displayCharacterStats = new NoelStats
-                                ("Noel", "DPS", 75, 100, true); }
+                                (true); }
                     case 3 -> { character = new RemrieStats
-                                ("Remrie", "Tank/Utility", 100, 75, true);
+                                (true);
                                 displayCharacterStats = new RemrieStats
-                                ("Remrie", "Tank/Utility", 100, 75, true); }
+                                (true); }
                     default -> { character = new CharacterStats(); 
                                 displayCharacterStats = new CharacterStats(); }
                 }
@@ -163,7 +185,8 @@ public class App{
         }while(characterChoosing);
 
         System.out.println("Haluh na out");
-
+        
         sc.close();
+        return character;
     }
 }
