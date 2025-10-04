@@ -26,38 +26,18 @@ public class CharacterSkills {
         this.manaConsumed = manaConsumed;    
     }
 
-    public void setNameOfSkill(String nameOfSkill){
-        this.nameOfSkill = nameOfSkill;
-    }
-    public String getNameOfSkill(){
-        return nameOfSkill;
-    }
+    public void setNameOfSkill(String nameOfSkill){ this.nameOfSkill = nameOfSkill; }
+    public String getNameOfSkill(){ return nameOfSkill; }
 
-    public void setDescription(String descriptionOfSkill){
-        this.descriptionOfSkill = descriptionOfSkill;
-    }
-    public String getDescription(){
-        return descriptionOfSkill;
-    }
+    public void setDescription(String descriptionOfSkill){ this.descriptionOfSkill = descriptionOfSkill; }
+    public String getDescription(){ return descriptionOfSkill; }
 
-    public void setDmg(int dmg){
-        this.dmg = dmg;
-    }
-    public int getDmg(){
-        return dmg;
-    }
+    public void setDmg(int dmg){ this.dmg = dmg; }
+    public int getDmg(){ return dmg; }
 
-    public void setCooldown(int cooldown){
-        this.cooldown = cooldown;
-    }
-    public int getCooldown(){
-        return cooldown;
-    }
+    public void setCooldown(int cooldown){ this.cooldown = cooldown; }
+    public int getCooldown(){ return cooldown; }
 
-    public void setManaConsumed(int manaConsumed) {
-        this.manaConsumed = manaConsumed;
-    }
-    int getManaConsumed(){
-        return manaConsumed;
-    }
+    public void setManaConsumed(int manaConsumed) { this.manaConsumed = manaConsumed; }
+    int getManaConsumed(){ return manaConsumed; }
 }

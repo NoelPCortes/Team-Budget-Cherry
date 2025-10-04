@@ -12,16 +12,16 @@ public class NoelStats extends CharacterStats implements Stats {
 
     @Override
     public int damageDealt(int atk) {
-        throw new UnsupportedOperationException("Unimplemented method 'damageDealt'");
+        return 0;
     }
 
     @Override
     public int damageTaken(int atk) {
-        throw new UnsupportedOperationException("Unimplemented method 'damageTaken'");
+        return 0;
     }
 
     @Override
     public int manaTaken(int mana) {
-        throw new UnsupportedOperationException("Unimplemented method 'manaTaken'");
+        return 0;
     }
 }

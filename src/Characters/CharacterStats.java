@@ -44,7 +44,7 @@ public class CharacterStats {
 
     public int getDmg(){ return baseDmg; }
 
-    public String getIsLocked(){ return (isLocked) ? "[Locked]" : ""; }
+    public boolean getIsLocked(){ return isLocked; }
 
     public void printCharacterStats(){
         System.out.println("--------------------------------");
