@@ -6,6 +6,9 @@ import Characters.ChelseyStats;
 import Characters.NoelStats;
 import Characters.RemrieStats;
 
+import Entities.EntityStats;
+import Entities.EntitySkills;
+
 public class App {
     static CharacterStats character = new CharacterStats();
     static CharacterSkills [] characterSkills = new CharacterSkills[3];
@@ -145,15 +148,15 @@ public class App {
                 
                 if (character.getName().equalsIgnoreCase("Chelsey")) 
                 {
-                    characterSkills[0] = new CharacterSkills("Flowchart Blast", 5, 2, 10);//stun enemies for 1 turn
+                    characterSkills[0] = new CharacterSkills("Flowchart Blast", 1, 3, 15);//stun enemies for 1 turn
                     characterSkills[0].setDescription(
                         "Shows a highly advance flowchart that confuses the enemy"
                         );
-                    characterSkills[1] = new CharacterSkills("Pseudo Shield", 10, 3, 15);// reduces dmg for enemies for 2 turn
+                    characterSkills[1] = new CharacterSkills("Pseudo Shield", 30, 4, 20);// reduces dmg for 30% for allies for 2 turns
                     characterSkills[1].setDescription(
                         "Enemy has just seen a psuedo-code for the first time and weakened their attack"
                         );
-                    characterSkills[2] = new CharacterSkills("Debug Cheer", 10, 2, 10);//restores hp and mana to teammates
+                    characterSkills[2] = new CharacterSkills("Debug Cheer", 20, 3, 15);//restores hp and mana(hp/2) to teammates
                     characterSkills[2].setDescription(
                         "You cheered too much. It motivated your teammates"
                         );

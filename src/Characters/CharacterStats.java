@@ -1,7 +1,7 @@
 package Characters;
 
-interface Stats {
-    public abstract int damageDealt(int atk);
+interface DealtStats {
+    public abstract int damageDealt();
     public abstract int damageTaken(int atk);
     public abstract int manaTaken(int mana);
 }
