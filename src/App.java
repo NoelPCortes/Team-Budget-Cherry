@@ -1,14 +1,113 @@
 import java.util.Scanner;
 
-public class App{
-    public static void main(String[] args){
-        Scanner sc = new Scanner(System.in);
+import Characters.CharacterSkills;
+import Characters.CharacterStats;
+import Characters.ChelseyStats;
+import Characters.NoelStats;
+import Characters.RemrieStats;
 
-        CharacterStats character = new CharacterStats();
-        CharacterSkills [] characterSkills = new CharacterSkills[3];
+import Entities.EntityStats;
+import Entities.EntitySkills;
+
+public class App {
+    static CharacterStats character = new CharacterStats();
+    static CharacterSkills [] characterSkills = new CharacterSkills[3];
+    static {
         characterSkills[0] = new CharacterSkills();
         characterSkills[1] = new CharacterSkills();
         characterSkills[2] = new CharacterSkills();
+    }
+    static boolean noelIsLocked = true;
+    static boolean remrieIsLocked = true;
+
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+
+        printStory("In the faraway land of CIT-U, students once lived in peace\n" + //
+                        "Laughing in hallways, chilling at SM Seaside, and always sleeping \n" + //
+                        "\n" + //
+                        "But everything changed when a powerful force emerged\n" + //
+                        "A force so feared it turned happy students into stressed zombies\n" + //
+                        "\n" + //
+                        "They call this force..... KhaiOS\n" + //
+                        "\n" + //
+                        "Armed with quizzes, endless CodeChum activities, and NetBeans tasks inside the freezing computer laboratory,\nKhaiOS threatens to fail the entire batch before Christmas break\n" + //
+                        "\n" + //
+                        "But now…. these brave heroes rise\n" + //
+                        "Their quest? Defeat KhaiOS, survive the semester, and earn a peaceful Christmas break\n" + //
+                        "\n" + //
+                        "Will they make it.... or will they repeat this subject next year? \n" + //
+                        "The fate of their grades rest in your hands!\n", 0); //Default set to 50, set it to 0 for faster print
+
+        System.out.println("--------------------------------");
+        System.out.println();
+        System.out.println("          Start Game?");
+        System.out.println("            [Y : N]");
+        System.out.println();
+        System.out.println("--------------------------------");
+        System.out.print("Enter Choice: ");
+        char runGame = sc.next().charAt(0);
+
+        boolean characterChosen = false;
+        
+        boolean gameRunning = false; 
+        if(Character.toUpperCase(runGame) == 'Y')
+        {
+            gameRunning = true;
+        }
+        while (gameRunning) {
+
+            //Choosing characters
+            while (!characterChosen) {
+                chooseCharacter();
+                if(character.getIsLocked())
+                {
+                    System.out.println("----------------------------------------------------------------");
+                    System.out.println("           Character is locked choose someone else");
+                    System.out.println("----------------------------------------------------------------");
+                    System.out.println();
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                } 
+                else 
+                {
+                    characterChosen = true;
+                }
+            }
+
+
+
+            //Temporary solution to exit the game
+            System.out.println("JUST EXIT MEN");
+            char gameChoice = sc.next().charAt(0);
+            if(Character.toUpperCase(gameChoice) == 'Y'){
+                gameRunning = false;
+            }
+        }
+
+        sc.close();
+    }
+
+
+    public static void printStory(String message, int delay){
+        for(char c : message.toCharArray()){
+            System.out.print(c);
+            try {
+                Thread.sleep(delay);
+            } catch (InterruptedException e){
+                Thread.currentThread().interrupt();
+            }
+        }
+        System.out.println();
+    }
+
+
+    public static void chooseCharacter(){
+        Scanner sc = new Scanner(System.in);
+
         CharacterStats displayCharacterStats = new CharacterStats();
 
         boolean characterChoosing = true;
@@ -25,16 +124,16 @@ public class App{
                 System.out.println("Character(s)");
                 //Character 1
                 displayCharacterStats = new ChelseyStats
-                                    ("Chelsey", "Stategist/Support", 100, 50, false); // Fill argument "isLocked = false"
-                System.out.println("[1] Chelsey - The System Thinker" + displayCharacterStats.getIsLocked());
+                                    (false); // Defaults to false
+                System.out.println("[1] Chelsey - The System Thinker" + (displayCharacterStats.getIsLocked() ? "[Locked]" : ""));
                 //Character 2
                 displayCharacterStats = new NoelStats
-                                    ("Noel", "DPS", 75, 100, true);
-                System.out.println("[2] Noel - The Code Ace " + displayCharacterStats.getIsLocked());
+                                    (noelIsLocked);
+                System.out.println("[2] Noel - The Code Ace " + (displayCharacterStats.getIsLocked() ? "[Locked]" : ""));
                 //Character 3
                 displayCharacterStats = new RemrieStats
-                                    ("Remrie", "Tank/Utility", 150, 75, true); // Fill argument "isLocked = true"
-                System.out.println("[3] Remrie - The Meticulous Researcher " + displayCharacterStats.getIsLocked());
+                                    (remrieIsLocked); 
+                System.out.println("[3] Remrie - The Meticulous Researcher " + (displayCharacterStats.getIsLocked() ? "[Locked]" : ""));
                 System.out.println();
             }
 
@@ -49,15 +148,15 @@ public class App{
                 
                 if (character.getName().equalsIgnoreCase("Chelsey")) 
                 {
-                    characterSkills[0] = new CharacterSkills("Flowchart Blast", 5, 2, 10);//stun enemies for 1 turn
+                    characterSkills[0] = new CharacterSkills("Flowchart Blast", 1, 3, 15);//stun enemies for 1 turn
                     characterSkills[0].setDescription(
                         "Shows a highly advance flowchart that confuses the enemy"
                         );
-                    characterSkills[1] = new CharacterSkills("Pseudo Shield", 10, 3, 15);// reduces dmg for enemies for 2 turn
+                    characterSkills[1] = new CharacterSkills("Pseudo Shield", 30, 4, 20);// reduces dmg for 30% for allies for 2 turns
                     characterSkills[1].setDescription(
                         "Enemy has just seen a psuedo-code for the first time and weakened their attack"
                         );
-                    characterSkills[2] = new CharacterSkills("Debug Cheer", 10, 2, 10);//restores hp and mana to teammates
+                    characterSkills[2] = new CharacterSkills("Debug Cheer", 20, 3, 15);//restores hp and mana(hp/2) to teammates
                     characterSkills[2].setDescription(
                         "You cheered too much. It motivated your teammates"
                         );
@@ -103,18 +202,38 @@ public class App{
                     if (Character.toUpperCase(gameDecision) == 'R')
                     {
                         if (character.getName().equalsIgnoreCase("Chelsey")){
-                            System.out.println(YELLOW + "*" + RED + "*" + YELLOW + "*" + RED + "*"+ YELLOW + "*" + RESET + " " + " Skill 1 : " + characterSkills[0].getNameOfSkill() + " - " + characterSkills[0].getDescription());
-                            System.out.println(YELLOW + "*****" + RESET + " " + " Skill 2 : " + characterSkills[1].getNameOfSkill() + " - " + characterSkills[1].getDescription());
-                            System.out.println(YELLOW + " *** " + RESET + " " + " Skill 3 : " + characterSkills[2].getNameOfSkill() + " - " + characterSkills[2].getDescription());
+                            System.out.println(YELLOW + "*" + RED + "*" + YELLOW + "*" + RED + "*"+ YELLOW + "*" + RESET + "  --------------------------------");
+                            System.out.println(YELLOW + "*****" + RESET + "  Chelsey - The System Thinker");
+                            System.out.println(YELLOW + " *** " + RESET + "  Chelsey has survived cram sessions by turning chaos into pseudocodes. She believes that with proper planning they can outsmart ");
                         } else if (character.getName().equalsIgnoreCase("Noel")) {
-                            System.out.println(GREEN + " " + RED + "*" + GREEN + "*" + RED + "*"+ GREEN + " " + RESET + " " + " Skill 1 : " + characterSkills[0].getNameOfSkill() + " - " + characterSkills[0].getDescription());
-                            System.out.println(GREEN + "*****" + RESET + " " + " Skill 2 : " + characterSkills[1].getNameOfSkill() + " - " + characterSkills[1].getDescription());
-                            System.out.println(GREEN + " *** " + RESET + " " + " Skill 3 : " + characterSkills[2].getNameOfSkill() + " - " + characterSkills[2].getDescription());
+                            System.out.println(GREEN + " " + RED + "*" + GREEN + "*" + RED + "*"+ GREEN + " " + RESET + "  --------------------------------");
+                            System.out.println(GREEN + "*****" + RESET + "  Noel - The Code Ace");
+                            System.out.println(GREEN + " *** " + RESET + "  Known as the “Legend of the Leaderboard”, Noel never misses a challenge. He wants to prove he can defeat KhaiOS faster than anyone. ");
                         } else if (character.getName().equalsIgnoreCase("Remrie")) {
-                            System.out.println(BLUE + "*" + RED + "*" + BLUE + "*" + RED + "*"+ BLUE + "*" + RESET + " " + " Skill 1 : " + characterSkills[0].getNameOfSkill() + " - " + characterSkills[0].getDescription());
-                            System.out.println(BLUE + " *** " + RESET + " " + " Skill 2 : " + characterSkills[1].getNameOfSkill() + " - " + characterSkills[1].getDescription());
-                            System.out.println(BLUE + "  *  " + RESET + " " + " Skill 3 : " + characterSkills[2].getNameOfSkill() + " - " + characterSkills[2].getDescription());
+                            System.out.println(BLUE + "*" + RED + "*" + BLUE + "*" + RED + "*"+ BLUE + "*" + RESET + "  --------------------------------");
+                            System.out.println(BLUE + " *** " + RESET + "  Remrie - The Task Breaker");
+                            System.out.println(BLUE + "  *  " + RESET + "  Remrie takes assignments seriously, spending hours researching. But when problems persist frustration fuels his determination to break ");
                         }
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            Thread.currentThread().interrupt();
+                        }
+                        System.out.println("------------------------------------------------------------------------------------------------");
+                        System.out.println("                        SKILL 1");
+                        System.out.println(" " + characterSkills[0].getNameOfSkill());
+                        System.out.println(" - " + characterSkills[0].getDescription());
+                        System.out.println("------------------------------------------------------------------------------------------------");
+                        System.out.println("------------------------------------------------------------------------------------------------");
+                        System.out.println("                        SKILL 2");
+                        System.out.println(" " + characterSkills[1].getNameOfSkill());
+                        System.out.println(" - " + characterSkills[1].getDescription());
+                        System.out.println("------------------------------------------------------------------------------------------------");
+                        System.out.println("------------------------------------------------------------------------------------------------");
+                        System.out.println("                        SKILL 3");
+                        System.out.println("" + characterSkills[2].getNameOfSkill());
+                        System.out.println(" - " + characterSkills[2].getDescription());
+                        System.out.println("------------------------------------------------------------------------------------------------");
                         System.out.println();
                         System.out.print("Enter anything to go back: ");
                         sc.next();
@@ -137,6 +256,8 @@ public class App{
                 if(inputEntered >= 1 && inputEntered <= 3)
                 {
                     characterChosen = true;
+                } else {
+                    System.out.println("Invalid input must be only [1 - 3]");
                 }
             }
 
@@ -144,26 +265,22 @@ public class App{
                 switch (inputEntered)
                 {
                     case 1 -> { character = new ChelseyStats
-                                ("Chelsey", "Stategist/Support", 100, 50, false);
+                                (false);
                                 displayCharacterStats = new ChelseyStats
-                                ("Chelsey", "Stategist/Support", 100, 50, false); }
+                                (false); }
                     case 2 -> { character = new NoelStats
-                                ("Noel", "DPS", 75, 100, true); 
+                                (true); 
                                 displayCharacterStats = new NoelStats
-                                ("Noel", "DPS", 75, 100, true); }
+                                (true); }
                     case 3 -> { character = new RemrieStats
-                                ("Remrie", "Tank/Utility", 100, 75, true);
+                                (true);
                                 displayCharacterStats = new RemrieStats
-                                ("Remrie", "Tank/Utility", 100, 75, true); }
+                                (true); }
                     default -> { character = new CharacterStats(); 
                                 displayCharacterStats = new CharacterStats(); }
                 }
             }
 
         }while(characterChoosing);
-
-        System.out.println("Haluh na out");
-
-        sc.close();
     }
 }
