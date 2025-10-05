@@ -1,13 +1,9 @@
-import java.util.Scanner;
-
 import Characters.CharacterSkills;
 import Characters.CharacterStats;
 import Characters.ChelseyStats;
 import Characters.NoelStats;
 import Characters.RemrieStats;
-
-import Entities.EntityStats;
-import Entities.EntitySkills;
+import java.util.Scanner;
 
 public class Main {
     static CharacterStats character = new CharacterStats();
@@ -225,60 +221,58 @@ public class Main {
                         );
                 }
                 
-                while(characterChosen) {
+                OUTER:
+                while (characterChosen) {
                     System.out.println("[F] : CHOOSE CHARACTER ");
                     System.out.println("[R] : CHECK SKILLS ");
                     System.out.println("[E] : CHANGE CHARACTER ");
                     System.out.print("ENTER CHOICE: ");
                     gameDecision = sc.next().charAt(0);
                     System.out.println();
-                    if (Character.toUpperCase(gameDecision) == 'R')
-                    {
-                        if (character.getName().equalsIgnoreCase("Chelsey")){
-                            System.out.println(YELLOW + "*" + RED + "*" + YELLOW + "*" + RED + "*"+ YELLOW + "*" + RESET + "  --------------------------------");
-                            System.out.println(YELLOW + "*****" + RESET + "  Chelsey - The System Thinker");
-                            System.out.println(YELLOW + " *** " + RESET + "  Chelsey has survived cram sessions by turning chaos into pseudocodes. She believes that with proper planning they can outsmart ");
-                        } else if (character.getName().equalsIgnoreCase("Noel")) {
-                            System.out.println(GREEN + " " + RED + "*" + GREEN + "*" + RED + "*"+ GREEN + " " + RESET + "  --------------------------------");
-                            System.out.println(GREEN + "*****" + RESET + "  Noel - The Code Ace");
-                            System.out.println(GREEN + " *** " + RESET + "  Known as the “Legend of the Leaderboard”, Noel never misses a challenge. He wants to prove he can defeat KhaiOS faster than anyone. ");
-                        } else if (character.getName().equalsIgnoreCase("Remrie")) {
-                            System.out.println(BLUE + "*" + RED + "*" + BLUE + "*" + RED + "*"+ BLUE + "*" + RESET + "  --------------------------------");
-                            System.out.println(BLUE + " *** " + RESET + "  Remrie - The Task Breaker");
-                            System.out.println(BLUE + "  *  " + RESET + "  Remrie takes assignments seriously, spending hours researching. But when problems persist frustration fuels his determination to break ");
+                    switch (Character.toUpperCase(gameDecision)) {
+                        case 'R' -> {
+                            if (character.getName().equalsIgnoreCase("Chelsey")){
+                                System.out.println(YELLOW + "*" + RED + "*" + YELLOW + "*" + RED + "*"+ YELLOW + "*" + RESET + "  --------------------------------");
+                                System.out.println(YELLOW + "*****" + RESET + "  Chelsey - The System Thinker");
+                                System.out.println(YELLOW + " *** " + RESET + "  Chelsey has survived cram sessions by turning chaos into pseudocodes. She believes that with proper planning they can outsmart ");
+                            } else if (character.getName().equalsIgnoreCase("Noel")) {
+                                System.out.println(GREEN + " " + RED + "*" + GREEN + "*" + RED + "*"+ GREEN + " " + RESET + "  --------------------------------");
+                                System.out.println(GREEN + "*****" + RESET + "  Noel - The Code Ace");
+                                System.out.println(GREEN + " *** " + RESET + "  Known as the “Legend of the Leaderboard”, Noel never misses a challenge. He wants to prove he can defeat KhaiOS faster than anyone. ");
+                            } else if (character.getName().equalsIgnoreCase("Remrie")) {
+                                System.out.println(BLUE + "*" + RED + "*" + BLUE + "*" + RED + "*"+ BLUE + "*" + RESET + "  --------------------------------");
+                                System.out.println(BLUE + " *** " + RESET + "  Remrie - The Task Breaker");
+                                System.out.println(BLUE + "  *  " + RESET + "  Remrie takes assignments seriously, spending hours researching. But when problems persist frustration fuels his determination to break ");
+                            }   try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                Thread.currentThread().interrupt();
+                            }   System.out.println("------------------------------------------------------------------------------------------------");
+                            System.out.println("                        SKILL 1");
+                            System.out.println(" " + characterSkills[0].getNameOfSkill());
+                            System.out.println(" - " + characterSkills[0].getDescription());
+                            System.out.println("------------------------------------------------------------------------------------------------");
+                            System.out.println("------------------------------------------------------------------------------------------------");
+                            System.out.println("                        SKILL 2");
+                            System.out.println(" " + characterSkills[1].getNameOfSkill());
+                            System.out.println(" - " + characterSkills[1].getDescription());
+                            System.out.println("------------------------------------------------------------------------------------------------");
+                            System.out.println("------------------------------------------------------------------------------------------------");
+                            System.out.println("                        SKILL 3");
+                            System.out.println("" + characterSkills[2].getNameOfSkill());
+                            System.out.println(" - " + characterSkills[2].getDescription());
+                            System.out.println("------------------------------------------------------------------------------------------------");
+                            System.out.println();
+                            System.out.print("Enter anything to go back: ");
+                            sc.next();
                         }
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            Thread.currentThread().interrupt();
+                        case 'E' -> characterChosen = false;
+                        case 'F' -> {
+                            characterChoosing = false;
+                            break OUTER;
                         }
-                        System.out.println("------------------------------------------------------------------------------------------------");
-                        System.out.println("                        SKILL 1");
-                        System.out.println(" " + characterSkills[0].getNameOfSkill());
-                        System.out.println(" - " + characterSkills[0].getDescription());
-                        System.out.println("------------------------------------------------------------------------------------------------");
-                        System.out.println("------------------------------------------------------------------------------------------------");
-                        System.out.println("                        SKILL 2");
-                        System.out.println(" " + characterSkills[1].getNameOfSkill());
-                        System.out.println(" - " + characterSkills[1].getDescription());
-                        System.out.println("------------------------------------------------------------------------------------------------");
-                        System.out.println("------------------------------------------------------------------------------------------------");
-                        System.out.println("                        SKILL 3");
-                        System.out.println("" + characterSkills[2].getNameOfSkill());
-                        System.out.println(" - " + characterSkills[2].getDescription());
-                        System.out.println("------------------------------------------------------------------------------------------------");
-                        System.out.println();
-                        System.out.print("Enter anything to go back: ");
-                        sc.next();
-                    }
-                    else if (Character.toUpperCase(gameDecision) == 'E')
-                    {
-                        characterChosen = false;
-                    } 
-                    else if (Character.toUpperCase(gameDecision) == 'F')
-                    {
-                        characterChoosing = false;
-                        break;
+                        default -> {
+                        }
                     }
                 }
             } 
