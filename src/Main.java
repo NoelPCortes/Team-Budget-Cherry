@@ -9,7 +9,7 @@ import Characters.RemrieStats;
 import Entities.EntityStats;
 import Entities.EntitySkills;
 
-public class App {
+public class Main {
     static CharacterStats character = new CharacterStats();
     static CharacterSkills [] characterSkills = new CharacterSkills[3];
     static {
@@ -17,11 +17,19 @@ public class App {
         characterSkills[1] = new CharacterSkills();
         characterSkills[2] = new CharacterSkills();
     }
+
+    //Locked or Unlocked state of character
     static boolean noelIsLocked = true;
     static boolean remrieIsLocked = true;
 
+    //Able to move or not;
+    boolean playerMove = true;
+    boolean enemyMove = false;
+
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
+
+        showTitleScreen();
 
         printStory("In the faraway land of CIT-U, students once lived in peace\n" + //
                         "Laughing in hallways, chilling at SM Seaside, and always sleeping \n" + //
@@ -54,8 +62,12 @@ public class App {
         if(Character.toUpperCase(runGame) == 'Y')
         {
             gameRunning = true;
+        } else {
+            System.out.println("Ikaw gud");
         }
         while (gameRunning) {
+
+            int chosenField = DisplayChoice();
 
             //Choosing characters
             while (!characterChosen) {
@@ -92,7 +104,21 @@ public class App {
     }
 
 
-    public static void printStory(String message, int delay){
+    static void showTitleScreen(){
+        System.out.println("\n/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\");
+        System.out.println(" _____   _____  ");
+        System.out.println("|_   _| |_   _| ");
+        System.out.println("  | |     | |   ");
+        System.out.println("  | |     | |   QUEST");
+        System.out.println("  | |     | |   ");
+        System.out.println(" _| |_    | |   ");
+        System.out.println("|_____|   |_|   ");
+        System.out.println("\n/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\");
+        System.out.println();
+    }
+
+
+    static void printStory(String message, int delay){
         for(char c : message.toCharArray()){
             System.out.print(c);
             try {
@@ -105,7 +131,14 @@ public class App {
     }
 
 
-    public static void chooseCharacter(){
+    static int DisplayChoice(){//Returns the precedence of the chosen multiplechoie:D
+        int precedence = 0;
+        
+        return precedence;
+    }
+
+
+    static void chooseCharacter(){
         Scanner sc = new Scanner(System.in);
 
         CharacterStats displayCharacterStats = new CharacterStats();
