@@ -6,18 +6,25 @@ interface DealtStats {
 }
 
 public abstract class EntityStats {
-    public int baseDmg;
-    public int baseHealth;
+    private int baseDmg;
+    private int baseHealth;
+    private String name;
 
     public EntityStats(){
         baseDmg = 0;
         baseHealth = 0;
     }
 
-    public EntityStats(int baseDmg, int baseHealth){
+    public EntityStats(int baseDmg, int baseHealth, String name){
         this.baseDmg = baseDmg;
         this.baseHealth = baseHealth;
+        this.name = name;
     }
+
+    public String getName(){ return name; }
+
+    public abstract void printModel();
+    public abstract void printStats();
 
     public abstract String getDescription();
 

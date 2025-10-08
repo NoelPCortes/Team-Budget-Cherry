@@ -9,15 +9,27 @@ public class KhaiBreaker extends EntityStats implements DealtStats {
     public static final String PURPLE = "\u001B[35m";
 
     public KhaiBreaker(){
-        super(27, 200);
+        super(27, 200, "KhaiBreaker");
     }
 
+    @Override
     public void printModel(){
         System.out.println("##" + PURPLE + "%" + RESET + "##");
         System.out.println(PURPLE + "%%%%%" + RESET);
         System.out.println(" #" + PURPLE + "%" + RESET + "# ");
     }
 
+    @Override
+    public void printStats(){
+        System.out.println("------------------------------");
+        System.out.println("Health: " + String.valueOf(super.getHealth()));
+        System.out.println("Damage: " + String.valueOf(super.getDmg()));
+        System.out.println("------------------------------");
+    }
+
+    @Override
+    public String getName(){ return super.getName(); }
+    
     @Override
     public String getDescription(){
         return "Loves giving endless task";

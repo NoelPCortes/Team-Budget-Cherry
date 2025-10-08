@@ -9,15 +9,27 @@ public class KhaiOS extends EntityStats implements DealtStats {
     public static final String PURPLE = "\u001B[35m";
 
     public KhaiOS(){
-        super(40, 500);
+        super(40, 500, "KhaiOS");
     }
 
+    @Override
     public void printModel(){
         System.out.println(PURPLE + "%" + RESET + "#" + PURPLE + "%" + RESET + "#" + PURPLE + "%" + RESET);
         System.out.println(PURPLE + " %%% " + RESET);
         System.out.println(" #" + PURPLE + "%" + RESET + "# ");
     }
 
+    @Override
+    public void printStats(){
+        System.out.println("------------------------------");
+        System.out.println("Health: " + String.valueOf(super.getHealth()));
+        System.out.println("Damage: " + String.valueOf(super.getDmg()));
+        System.out.println("------------------------------");
+    }
+
+    @Override
+    public String getName(){ return super.getName(); }
+    
     @Override
     public String getDescription(){
         return "The ultimate embodiment of deadlines, exams, and despair";

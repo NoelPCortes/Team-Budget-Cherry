@@ -9,15 +9,27 @@ public class ExceptionPhantom extends EntityStats implements DealtStats {
     public static final String PURPLE = "\u001B[35m";
 
     public ExceptionPhantom(){
-        super(22, 100);
+        super(22, 100, "Exception Phantom");
     }
 
+    @Override
     public void printModel(){
         System.out.println("##" + PURPLE + "%" + RESET + "##");
         System.out.println(" #" + PURPLE + "%" + RESET + "# ");
         System.out.println("  " + PURPLE + "%" + RESET + "  ");
     }
 
+    @Override
+    public void printStats(){
+        System.out.println("------------------------------");
+        System.out.println("Health: " + String.valueOf(super.getHealth()));
+        System.out.println("Damage: " + String.valueOf(super.getDmg()));
+        System.out.println("------------------------------");
+    }
+
+    @Override
+    public String getName(){ return super.getName(); }
+    
     @Override
     public String getDescription(){
         return "Appears suddenly in your code and disappears when shown to your professor";

@@ -3,10 +3,33 @@ package Entities;
 import java.util.Random;
 
 public class PopQuizGoblin extends EntityStats implements DealtStats {
+
+    //Set Color
+    public static final String RESET = "\u001B[0m";
+    public static final String PURPLE = "\u001B[35m";
+
     public PopQuizGoblin(){
-        super(18, 70);
+        super(18, 70, "Pop Quiz Goblin");
     }
 
+    @Override
+    public void printModel(){
+        System.out.println("##" + PURPLE + "%" + RESET + "##");
+        System.out.println("#" + PURPLE + "%" + RESET + "#" + PURPLE + "%" + RESET + "#");
+        System.out.println("##" + PURPLE + "%" + RESET + "##");
+    }
+
+    @Override
+    public void printStats(){
+        System.out.println("------------------------------");
+        System.out.println("Health: " + String.valueOf(super.getHealth()));
+        System.out.println("Damage: " + String.valueOf(super.getDmg()));
+        System.out.println("------------------------------");
+    }
+
+    @Override
+    public String getName(){ return super.getName(); }
+    
     @Override
     public String getDescription(){
         return "Loves ambushing students with surprise quiz";

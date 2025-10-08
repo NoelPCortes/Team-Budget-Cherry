@@ -3,9 +3,32 @@ package Entities;
 import java.util.Random;
 
 public class SysAdmin extends EntityStats implements DealtStats {
+    
+    //Set Color
+    public static final String RESET = "\u001B[0m";
+    public static final String PURPLE = "\u001B[35m";
+
     public SysAdmin(){
-        super(33, 180);
+        super(33, 180, "SysAdmin");
     }
+
+    @Override
+    public void printModel(){
+        System.out.println(PURPLE + "%%" + RESET + "#" + PURPLE + "%%" + RESET);
+        System.out.println(" #" + PURPLE + "%" + RESET +"# ");
+        System.out.println(PURPLE + " %" + RESET + "#" + PURPLE + "% " + RESET);
+    }
+
+    @Override
+    public void printStats(){
+        System.out.println("------------------------------");
+        System.out.println("Health: " + String.valueOf(super.getHealth()));
+        System.out.println("Damage: " + String.valueOf(super.getDmg()));
+        System.out.println("------------------------------");
+    }
+
+    @Override
+    public String getName(){ return super.getName(); }
 
     @Override
     public String getDescription(){

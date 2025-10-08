@@ -1,5 +1,7 @@
 package Characters;
 
+import java.util.Random;
+
 public class NoelStats extends CharacterStats implements DealtStats {
     public int cooldownCtr;
 
@@ -42,16 +44,17 @@ public class NoelStats extends CharacterStats implements DealtStats {
 
     @Override
     public int damageDealt() {
-        return 0;
+        Random rand = new Random();
+        return rand.nextInt(super.getDmg() + 1) + (int)Math.round(super.getDmg() * .5);
     }
 
     @Override
-    public int damageTaken(int atk) {
-        return 0;
+    public void damageTaken(int atk) {
+        super.setHealth(super.getHealth() - atk);
     }
 
     @Override
-    public int manaTaken(int mana) {
-        return 0;
+    public void manaTaken(int mana) {
+        super.setMana(super.getMana() - mana);
     }
 }

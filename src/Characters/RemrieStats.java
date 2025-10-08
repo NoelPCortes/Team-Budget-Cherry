@@ -1,5 +1,7 @@
 package Characters;
 
+import java.util.Random;
+
 public class RemrieStats extends CharacterStats implements DealtStats {
     public int cooldownCtr;
 
@@ -34,16 +36,17 @@ public class RemrieStats extends CharacterStats implements DealtStats {
 
     @Override
     public int damageDealt() {
-        throw new UnsupportedOperationException("Unimplemented method 'damageDealt'");
+        Random rand = new Random();
+        return rand.nextInt(super.getDmg() + 1) + (int)Math.round(super.getDmg() * .5);
     }
 
     @Override
-    public int damageTaken(int atk) {
-        throw new UnsupportedOperationException("Unimplemented method 'damageTaken'");
+    public void damageTaken(int atk) {
+        super.setHealth(super.getHealth() - atk);
     }
 
     @Override
-    public int manaTaken(int mana) {
-        throw new UnsupportedOperationException("Unimplemented method 'manaTaken'");
+    public void manaTaken(int mana) {
+        super.setMana(super.getMana() - mana);
     }
 }

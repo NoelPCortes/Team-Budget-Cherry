@@ -9,15 +9,27 @@ public class CramZombie extends EntityStats implements DealtStats {
     public static final String PURPLE = "\u001B[35m";
 
     public CramZombie(){
-        super(10, 60);
+        super(10, 60, "Cram Zombie");
     }
 
+    @Override
     public void printModel(){
         System.out.println(" ### ");
         System.out.println("#" +  PURPLE + "%%%" + RESET + "#");
         System.out.println(PURPLE + "%%%%%" + RESET);
     }
 
+    @Override
+    public void printStats(){
+        System.out.println("------------------------------");
+        System.out.println("Health: " + String.valueOf(super.getHealth()));
+        System.out.println("Damage: " + String.valueOf(super.getDmg()));
+        System.out.println("------------------------------");
+    }
+
+    @Override
+    public String getName(){ return super.getName(); }
+    
     @Override
     public String getDescription(){
         return "Born from sleepless nights, this student has become one with the cram cycle.";

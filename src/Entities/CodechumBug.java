@@ -9,14 +9,26 @@ public class CodechumBug extends EntityStats implements DealtStats {
     public static final String PURPLE = "\u001B[35m";
 
     public CodechumBug(){
-        super(15, 90);
+        super(15, 90, "CodeChum Bug");
     }
 
+    @Override
     public void printModel(){
         System.out.println(" #" + PURPLE + "%" + RESET + "# ");
         System.out.println("##" + PURPLE + "%" + RESET + "##");
         System.out.println("#" + PURPLE + "%" + RESET + "#" + PURPLE + "%" + RESET + "#");
     }
+
+    @Override
+    public void printStats(){
+        System.out.println("------------------------------");
+        System.out.println("Health: " + String.valueOf(super.getHealth()));
+        System.out.println("Damage: " + String.valueOf(super.getDmg()));
+        System.out.println("------------------------------");
+    }
+
+    @Override
+    public String getName(){ return super.getName(); }
     
     @Override
     public String getDescription(){

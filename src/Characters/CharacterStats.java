@@ -2,8 +2,8 @@ package Characters;
 
 interface DealtStats {
     public abstract int damageDealt();
-    public abstract int damageTaken(int atk);
-    public abstract int manaTaken(int mana);
+    public abstract void damageTaken(int atk);
+    public abstract void manaTaken(int mana);
 }
 
 public class CharacterStats {

@@ -9,15 +9,27 @@ public class DeadlineGhost extends EntityStats implements DealtStats {
     public static final String PURPLE = "\u001B[35m";
     
     public DeadlineGhost(){
-        super(12, 50);
+        super(12, 50, "Deadline Ghost");
     }
 
+    @Override
     public void printModel(){
         System.out.println( " ### ");
         System.out.println("#" + PURPLE + "%" + RESET + "#" + PURPLE + "%" + RESET + "#");
         System.out.println("#####");
     }
 
+    @Override
+    public void printStats(){
+        System.out.println("------------------------------");
+        System.out.println("Health: " + String.valueOf(super.getHealth()));
+        System.out.println("Damage: " + String.valueOf(super.getDmg()));
+        System.out.println("------------------------------");
+    }
+
+    @Override
+    public String getName(){ return super.getName(); }
+    
     @Override
     public String getDescription(){
         return "Forever haunting those who missed deadlines. Their presence reminds you of what ifs";

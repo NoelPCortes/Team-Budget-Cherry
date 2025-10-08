@@ -1,11 +1,33 @@
+//Characters
 import Characters.CharacterSkills;
 import Characters.CharacterStats;
 import Characters.ChelseyStats;
 import Characters.NoelStats;
 import Characters.RemrieStats;
+
+//Enemies
+import Entities.EntitySkills;
+import Entities.EntityStats;
+import Entities.CodechumBug;
+import Entities.CramZombie;
+import Entities.DeadlineGhost;
+import Entities.ExceptionPhantom;
+import Entities.FirewallGuardian;
+import Entities.KhaiBreaker;
+import Entities.KhaiOS;
+import Entities.LagDemon;
+import Entities.PopQuizGoblin;
+import Entities.SyntaxSerpent;
+import Entities.SysAdmin;
+
+//Libraries
+import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Main {
+    int characterCtr = 1; //Defaults to 1 as starting available placement
+    //Character 1
     static CharacterStats character = new CharacterStats();
     static CharacterSkills [] characterSkills = new CharacterSkills[3];
     static {
@@ -14,13 +36,28 @@ public class Main {
         characterSkills[2] = new CharacterSkills();
     }
 
+    //Character 2
+
+    //Character 3
+
+    //TODO: SET ENEMIES TO THEIR CORRESPONDING MAP BY USING ARRAYLIST
+
+    //TODO: HAVE INVENTORY FOR SHOP
+
     //Locked or Unlocked state of character
     static boolean noelIsLocked = true;
     static boolean remrieIsLocked = true;
 
     //Able to move or not;
-    boolean playerMove = true;
-    boolean enemyMove = false;
+    static boolean playerMove = true;
+    static boolean enemyMove = false;
+
+    //Game Loop
+    static boolean gameRunning = true; 
+
+    //Global Variable
+    static boolean characterChosen = false;
+    static int gameCurrency = 10;
 
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
@@ -43,57 +80,11 @@ public class Main {
                         "Will they make it.... or will they repeat this subject next year? \n" + //
                         "The fate of their grades rest in your hands!\n", 0); //Default set to 50, set it to 0 for faster print
 
-        System.out.println("--------------------------------");
-        System.out.println();
-        System.out.println("          Start Game?");
-        System.out.println("            [Y : N]");
-        System.out.println();
-        System.out.println("--------------------------------");
-        System.out.print("Enter Choice: ");
-        char runGame = sc.next().charAt(0);
 
-        boolean characterChosen = false;
-        
-        boolean gameRunning = false; 
-        if(Character.toUpperCase(runGame) == 'Y')
-        {
-            gameRunning = true;
-        } else {
-            System.out.println("Ikaw gud");
-        }
         while (gameRunning) {
 
-            int chosenField = DisplayChoice();
+            mainMenu();
 
-            //Choosing characters
-            while (!characterChosen) {
-                chooseCharacter();
-                if(character.getIsLocked())
-                {
-                    System.out.println("----------------------------------------------------------------");
-                    System.out.println("           Character is locked choose someone else");
-                    System.out.println("----------------------------------------------------------------");
-                    System.out.println();
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                } 
-                else 
-                {
-                    characterChosen = true;
-                }
-            }
-
-
-
-            //Temporary solution to exit the game
-            System.out.println("JUST EXIT MEN");
-            char gameChoice = sc.next().charAt(0);
-            if(Character.toUpperCase(gameChoice) == 'Y'){
-                gameRunning = false;
-            }
         }
 
         sc.close();
@@ -128,9 +119,112 @@ public class Main {
 
 
     static int DisplayChoice(){//Returns the precedence of the chosen multiplechoie:D
+        Scanner sc = new Scanner(System.in);
         int precedence = 0;
-        
+        while(precedence == 0){
+            System.out.println("------------------------------------------------------------------------------");
+            System.out.println("        [1]Show Heroes  -  Who will save you from KhaiOS?");
+            System.out.println("        [2]Show Enemies -  Who will hinder you");
+            System.out.println("        [3]Show worlds  -  The journey you have to take");
+            System.out.println("        [4]Show Shops   -  Whatever you may need to help you");
+            System.out.println("        [5]Start Game!  -  Are you brave enough to defeat KhaiOS?");
+            System.out.println("        [6]Exit         -  Coward");
+            System.out.println("------------------------------------------------------------------------------");
+            boolean properInput = false;
+            while(!properInput){
+                try {
+                    System.out.print("Enter Choice: ");
+                    precedence = sc.nextInt();
+                    if(precedence >= 1 && precedence <= 6)
+                    {
+                        properInput = true;
+                    }
+                    else
+                    {
+                        System.out.println("Invalid input must be only [1 - 6]");
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("CHOOOOSEEE A. NUNBEREJRAOIDHJOSAHDOIASHJDIOHAIOFHO");
+                    sc.next();
+                    try {
+                        Thread.sleep(1500);
+                    } catch (InterruptedException es) {
+                        Thread.currentThread().interrupt();
+                    }
+                    precedence = 0;
+                }
+            }
+        }
         return precedence;
+    }
+
+
+    static void mainMenu(){
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        int chosenPrecedence = DisplayChoice();
+        switch(chosenPrecedence){
+            case 1 -> {
+                characterChosen = false;
+                while (!characterChosen) {
+                    chooseCharacter();
+                    if(character.getIsLocked())
+                    {
+                        System.out.println("----------------------------------------------------------------");
+                        System.out.println("           Character is locked choose someone else");
+                        System.out.println("----------------------------------------------------------------");
+                        System.out.println();
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    } 
+                    else 
+                    {
+                        characterChosen = true;
+                        //TODO: MAKE THE PLAYER CHOSE TO SWITCH CHARACTER
+                        //TODO: MAKE THE PLAYER ADD/APPEND A NEW CHARACTER
+                        //TODO: HAVE A POSITION TO SET PLACEMENT
+                        //TODO: HAVE A AVAILABLE HERO PLACEMENT STARTS WITH 1 MAX IS 3
+                    }
+                }
+            }
+            case 2 -> {
+                showEnemies();
+            }
+            case 3 -> {
+                if(characterChosen){
+                    System.out.println("YIPEEE");
+                } else {
+                    System.out.println("No characters chosen.");
+                }
+                //TODO: SHOW MAP AND HAVE ENEMIES SET TO THEM
+            }
+            case 4 -> {
+                System.out.println("YIPPEEEEEE");
+                //TODO: SHOW ITEMS AND SELL THEM
+            }
+            case 5 -> {
+                System.out.println("YIPPEE");
+                //TODO: START GAME BUT LET THE PLAYER CHOOSE THEIR MAP
+                //DEFAULTS TO WORLD 1 AVAILABLE AND OTHERS ARE LOCKED
+            }
+            case 6 -> {
+                System.out.println("-----------------------------");
+                System.out.println("        Exting...");
+                System.out.println("-----------------------------");
+                gameRunning = false;
+            }
+        }
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
     }
 
 
@@ -153,15 +247,15 @@ public class Main {
                 System.out.println("Character(s)");
                 //Character 1
                 displayCharacterStats = new ChelseyStats
-                                    (false); // Defaults to false
+                    (false); // Defaults to false
                 System.out.println("[1] Chelsey - The System Thinker" + (displayCharacterStats.getIsLocked() ? "[Locked]" : ""));
                 //Character 2
                 displayCharacterStats = new NoelStats
-                                    (noelIsLocked);
+                    (noelIsLocked);
                 System.out.println("[2] Noel - The Code Ace " + (displayCharacterStats.getIsLocked() ? "[Locked]" : ""));
                 //Character 3
                 displayCharacterStats = new RemrieStats
-                                    (remrieIsLocked); 
+                    (remrieIsLocked); 
                 System.out.println("[3] Remrie - The Meticulous Researcher " + (displayCharacterStats.getIsLocked() ? "[Locked]" : ""));
                 System.out.println();
             }
@@ -221,7 +315,6 @@ public class Main {
                         );
                 }
                 
-                OUTER:
                 while (characterChosen) {
                     System.out.println("[F] : CHOOSE CHARACTER ");
                     System.out.println("[R] : CHECK SKILLS ");
@@ -231,23 +324,30 @@ public class Main {
                     System.out.println();
                     switch (Character.toUpperCase(gameDecision)) {
                         case 'R' -> {
-                            if (character.getName().equalsIgnoreCase("Chelsey")){
+                            if (character.getName().equalsIgnoreCase("Chelsey"))
+                            {
                                 System.out.println(YELLOW + "*" + RED + "*" + YELLOW + "*" + RED + "*"+ YELLOW + "*" + RESET + "  --------------------------------");
                                 System.out.println(YELLOW + "*****" + RESET + "  Chelsey - The System Thinker");
                                 System.out.println(YELLOW + " *** " + RESET + "  Chelsey has survived cram sessions by turning chaos into pseudocodes. She believes that with proper planning they can outsmart ");
-                            } else if (character.getName().equalsIgnoreCase("Noel")) {
+                            } 
+                            else if (character.getName().equalsIgnoreCase("Noel")) 
+                            {
                                 System.out.println(GREEN + " " + RED + "*" + GREEN + "*" + RED + "*"+ GREEN + " " + RESET + "  --------------------------------");
                                 System.out.println(GREEN + "*****" + RESET + "  Noel - The Code Ace");
                                 System.out.println(GREEN + " *** " + RESET + "  Known as the “Legend of the Leaderboard”, Noel never misses a challenge. He wants to prove he can defeat KhaiOS faster than anyone. ");
-                            } else if (character.getName().equalsIgnoreCase("Remrie")) {
+                            } 
+                            else if (character.getName().equalsIgnoreCase("Remrie")) 
+                            {
                                 System.out.println(BLUE + "*" + RED + "*" + BLUE + "*" + RED + "*"+ BLUE + "*" + RESET + "  --------------------------------");
                                 System.out.println(BLUE + " *** " + RESET + "  Remrie - The Task Breaker");
                                 System.out.println(BLUE + "  *  " + RESET + "  Remrie takes assignments seriously, spending hours researching. But when problems persist frustration fuels his determination to break ");
-                            }   try {
+                            } 
+                            try {
                                 Thread.sleep(1000);
                             } catch (InterruptedException e) {
                                 Thread.currentThread().interrupt();
-                            }   System.out.println("------------------------------------------------------------------------------------------------");
+                            } 
+                            System.out.println("------------------------------------------------------------------------------------------------");
                             System.out.println("                        SKILL 1");
                             System.out.println(" " + characterSkills[0].getNameOfSkill());
                             System.out.println(" - " + characterSkills[0].getDescription());
@@ -268,24 +368,40 @@ public class Main {
                         }
                         case 'E' -> characterChosen = false;
                         case 'F' -> {
+                            characterChosen = false;
                             characterChoosing = false;
-                            break OUTER;
+                            break;
                         }
                         default -> {
+
                         }
                     }
                 }
             } 
             else
             {
-                System.out.print("CHOOSE YOUR CHARACTER: ");
-                inputEntered = sc.nextInt();
-                if(inputEntered >= 1 && inputEntered <= 3)
-                {
-                    characterChosen = true;
-                } else {
-                    System.out.println("Invalid input must be only [1 - 3]");
-                }
+                boolean properInput = false;
+                    try {
+                        System.out.print("CHOOSE YOUR CHARACTER: ");
+                        inputEntered = sc.nextInt();
+                        if(inputEntered >= 1 && inputEntered <= 3)
+                        {
+                            characterChosen = true;
+                            properInput = true;
+                        } 
+                        else 
+                        {
+                            System.out.println("Invalid input must be only [1 - 3]");
+                        }
+                    } catch (InputMismatchException e){
+                        System.out.println("AAAAAAAHHHH ANNOYYINGGG THE SYSSTEEMMMM");
+                        try {
+                            Thread.sleep(1500);
+                        } catch (InterruptedException es){
+                            Thread.currentThread().interrupt();
+                        }
+                        sc.next();
+                    }
             }
 
             if(characterChoosing){
@@ -296,18 +412,48 @@ public class Main {
                                 displayCharacterStats = new ChelseyStats
                                 (false); }
                     case 2 -> { character = new NoelStats
-                                (true); 
+                                (noelIsLocked); 
                                 displayCharacterStats = new NoelStats
-                                (true); }
+                                (noelIsLocked); }
                     case 3 -> { character = new RemrieStats
-                                (true);
+                                (remrieIsLocked);
                                 displayCharacterStats = new RemrieStats
-                                (true); }
+                                (remrieIsLocked); }
                     default -> { character = new CharacterStats(); 
                                 displayCharacterStats = new CharacterStats(); }
                 }
             }
-
         }while(characterChoosing);
+    }
+
+    static void showEnemies(){
+        Scanner sc = new Scanner(System.in);
+
+        ArrayList<EntityStats> entityStats = new ArrayList<>();
+        entityStats.add(new CramZombie());
+        entityStats.add(new PopQuizGoblin());
+        entityStats.add(new DeadlineGhost());
+        entityStats.add(new CodechumBug());
+        entityStats.add(new ExceptionPhantom());
+        entityStats.add(new SyntaxSerpent());
+        entityStats.add(new KhaiBreaker());
+        entityStats.add(new LagDemon());
+        entityStats.add(new FirewallGuardian());
+        entityStats.add(new SysAdmin());
+        entityStats.add(new KhaiOS());
+
+        for(EntityStats eS : entityStats){
+            System.out.println();
+            System.out.println("-----------------------------------------");
+            System.out.println("    " + eS.getName());
+            System.out.println("-----------------------------------------");
+            eS.printModel();
+            System.out.println("Description -");
+            System.out.println("    " + eS.getDescription());
+            eS.printStats();
+            System.out.println();
+        }
+        System.out.print("Enter anything to continue: ");
+        sc.next();
     }
 }
