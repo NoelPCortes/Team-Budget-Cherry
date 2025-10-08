@@ -22,35 +22,74 @@ import Entities.SysAdmin;
 
 //Libraries
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Main {
-    int characterCtr = 1; //Defaults to 1 as starting available placement
-    //Character 1
-    static CharacterStats character = new CharacterStats();
-    static CharacterSkills [] characterSkills = new CharacterSkills[3];
-    static {
-        characterSkills[0] = new CharacterSkills();
-        characterSkills[1] = new CharacterSkills();
-        characterSkills[2] = new CharacterSkills();
-    }
-
-    //Character 2
-
-    //Character 3
-
-    //TODO: SET ENEMIES TO THEIR CORRESPONDING MAP BY USING ARRAYLIST
-
-    //TODO: HAVE INVENTORY FOR SHOP
-
     //Locked or Unlocked state of character
     static boolean noelIsLocked = true;
     static boolean remrieIsLocked = true;
 
+    static ArrayList<CharacterStats> character = new ArrayList<>();
+    static ArrayList<ArrayList<CharacterSkills>> characterSkills = new ArrayList<>();
+    static {
+        character.add(new ChelseyStats(false)); // Character 1
+        character.add(new NoelStats(noelIsLocked)); // Character 2
+        character.add(new RemrieStats(remrieIsLocked)); // Character 3
+
+        characterSkills.add(new ArrayList<>(List.of( // Character 1 Skill
+            addSkill("Flowchart Blast", 1, 3, 15, "Shows a highly advanced flowchart that confuses the enemy"),
+            addSkill("Pseudo Shield", 30, 4, 20, "Enemy has just seen a pseudocode for the first time and weakened their attack"),
+            addSkill("Debug Cheer", 20, 3, 15, "You cheered too much. It motivated your teammates")
+        )));
+
+        characterSkills.add(new ArrayList<>(List.of( // Character 2 Skill
+            addSkill("Speedrun Slash", 5, 0, 15, "Endless attack but consumes your physical, mental, emotional health. But her feelings for you weren't endless"),
+            addSkill("Syntax Storm", 50, 2, 45, "Gives everything you got but drains your energy. Like how your energy was drained by losing her"),
+            addSkill("Compile & Crash", 50, 0, 2, "\"Deals too much damage that it made you unconscious. Like how unconscious her feelings were to you\"")
+        )));
+
+        characterSkills.add(new ArrayList<>(List.of( // Character 3 Skill
+            addSkill("Frustration Smash", 100, 2, 10, "Breaks the system. Has a chance to kill an enemy instantly"),
+            addSkill("Help Request", 20, 3, 15, "Care package dropping and inside it are endless Google searches"),
+            addSkill("Research Mode", 15, 2, 12, "Research on enemy weak points")
+        )));
+    }
+
+    private static CharacterSkills addSkill(String name, int dmg, int cooldown, int manaConsumes, String desc){
+        CharacterSkills skill = new CharacterSkills(name, dmg, cooldown, manaConsumes);
+        skill.setDescription(desc);
+        return skill;
+    }
+
+    //Enemies
+    static ArrayList<ArrayList<EntityStats>> enemy = new ArrayList<>();
+    static {
+        enemy.add(new ArrayList<EntityStats>());//World 1
+        enemy.add(new ArrayList<EntityStats>());//World 2
+        enemy.add(new ArrayList<EntityStats>());//World 3
+
+        enemy.get(0).add(new CramZombie());
+        enemy.get(0).add(new DeadlineGhost());
+        enemy.get(0).add(new PopQuizGoblin());
+
+        enemy.get(1).add(new CodechumBug());
+        enemy.get(1).add(new ExceptionPhantom());
+        enemy.get(1).add(new SyntaxSerpent());
+        enemy.get(1).add(new KhaiBreaker());
+
+        enemy.get(2).add(new LagDemon());
+        enemy.get(2).add(new FirewallGuardian());
+        enemy.get(2).add(new SysAdmin());
+        enemy.get(2).add(new KhaiOS());
+    }
+
+    //TODO: HAVE INVENTORY FOR SHOP
+
     //Able to move or not;
     static boolean playerMove = true;
-    static boolean enemyMove = false;
+    static boolean enemyMove = true;
 
     //Game Loop
     static boolean gameRunning = true; 
@@ -58,6 +97,7 @@ public class Main {
     //Global Variable
     static boolean characterChosen = false;
     static int gameCurrency = 10;
+    int characterCtr = 1; //Defaults to 1 as starting available placement
 
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
@@ -215,7 +255,9 @@ public class Main {
             }
             case 6 -> {
                 System.out.println("-----------------------------");
+                System.out.println();
                 System.out.println("        Exting...");
+                System.out.println();
                 System.out.println("-----------------------------");
                 gameRunning = false;
             }
@@ -227,8 +269,10 @@ public class Main {
         System.out.println();
     }
 
-
-    static void chooseCharacter(){
+    //TODO: Change every called array to arraylist AND properly print everything to their same spot with Chelsey being first, Noel in the middle, and Remrie last
+    //REMINDER: DO NOT REMOVE THREADINGS, TRY - CATCH, is all:>
+    //Returns the order of the character
+    static int chooseCharacter(){
         Scanner sc = new Scanner(System.in);
 
         CharacterStats displayCharacterStats = new CharacterStats();
