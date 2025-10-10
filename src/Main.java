@@ -133,13 +133,13 @@ public class Main {
 
     static void showTitleScreen(){
         System.out.println("\n/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\");
-        System.out.println(" _____   _____  ");
-        System.out.println("|_   _| |_   _| ");
-        System.out.println("  | |     | |   ");
-        System.out.println("  | |     | |   QUEST");
-        System.out.println("  | |     | |   ");
-        System.out.println(" _| |_    | |   ");
-        System.out.println("|_____|   |_|   ");
+        System.out.println(" _____   _____      ___      _     _   ________    ______     _____");
+        System.out.println("|_   _| |_   _|    / _  \\  | |   | |  ||______|  /   ____|  |_   _|");
+        System.out.println("  | |     | |     | | | ||  | |   | |  ||         ( (____      | |");
+        System.out.println("  | |     | |     | | | ||  | |   | |  ||____      \\__  )     | |");
+        System.out.println("  | |     | |     | | | ||  | |   | |  ||____|     \\__   )    | |");
+        System.out.println(" _| |_    | |     | | | ||  | /___| |  ||______   ___)    |    | |");
+        System.out.println("|_____|   |_|      \\___//  \\____/ /  ||______|  |______/     |_|");
         System.out.println("\n/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\");
         System.out.println();
     }
